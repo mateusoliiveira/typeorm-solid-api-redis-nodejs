@@ -4,6 +4,7 @@ import ShowUserService from '../services/ShowUserService'
 import CreateUserService from '../services/CreateUserService'
 import UpdateUserService from '../services/UpdateUserService'
 import DeleteUserService from '../services/ShowUserService'
+import HashUserPassService from '../services/HashUserPassService'
 
 export default class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -19,7 +20,13 @@ export default class UsersController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     const createUsers = new CreateUserService();
-    return response.status(201).json(await createUsers.execute({ ...request.body }));
+    const hashUserPass = new HashUserPassService();
+    const password = await hashUserPass.execute(request.body.password)
+    return response.status(201).json(
+      await createUsers.execute({
+        ...request.body,
+        password
+      }));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {

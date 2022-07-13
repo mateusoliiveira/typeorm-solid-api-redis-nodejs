@@ -1,4 +1,5 @@
 import { getCustomRepository } from "typeorm";
+import AppError from "../../../shared/errors/AppError";
 import User from "../typeorm/entities/User";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 
@@ -14,8 +15,8 @@ export default class CreateUserService {
     const usersRepository = getCustomRepository(UsersRepository);
 
     const userExist = await usersRepository.findOne(id);
-    if (!userExist) throw new Error(`User ${id} not found`);
-    if (userExist.name !== name) throw new Error('Há um produto com este nome')
+    if (!userExist) throw new AppError(`User ${id} not found`);
+    if (userExist.name !== name) throw new AppError('Há um produto com este nome')
 
     return await usersRepository.save({ id, name, price, quantity })
   }
