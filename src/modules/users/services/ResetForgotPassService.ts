@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import AppError from "../../../shared/errors/AppError";
+import User from "../typeorm/entities/User";
 import UserToken from "../typeorm/entities/UserToken";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 import UserTokensRepository from "../typeorm/repositories/UserTokensRepository";
@@ -11,7 +12,7 @@ interface IRequest {
 }
 
 export default class ResetForgotPassService {
-  public async execute({ token, password }: IRequest): Promise<void> {
+  public async execute({ token, password }: IRequest): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
     const userTokensRepository = getCustomRepository(UserTokensRepository);
     const hashPass = new HashUserPassService();
@@ -25,6 +26,8 @@ export default class ResetForgotPassService {
     const actualDate = new Date().getTime() - new Date(recoveryToken.created_at).getTime()
     if (actualDate > 720000) throw new AppError('Token de recuperação expirado, faça uma nova requisição.')
 
-    user.password = await hashPass.execute(user.password)
+    user.password = await hashPass.execute(password)
+    return await usersRepository.save(user)
+
   }
 }
