@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-import ListUserService from '../services/ListUserService'
-import ShowUserService from '../services/ShowUserService'
-import CreateUserService from '../services/CreateUserService'
-import UpdateUserService from '../services/UpdateUserService'
-import DeleteUserService from '../services/ShowUserService'
-import HashUserPassService from '../services/HashUserPassService'
+import ListUserService from '../services/UserServices/ListUserService'
+import ShowUserService from '../services/UserServices/ShowUserService'
+import CreateUserService from '../services/UserServices/CreateUserService'
+import DeleteUserService from '../services/UserServices/ShowUserService'
+import HashUserPassService from '../services/PasswordServices/HashUserPassService'
 
 export default class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -27,12 +26,6 @@ export default class UsersController {
         ...request.body,
         password
       }));
-  }
-
-  public async update(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
-    const updateUsers = new UpdateUserService();
-    return response.status(201).json(await updateUsers.execute({ id, ...request.body }));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

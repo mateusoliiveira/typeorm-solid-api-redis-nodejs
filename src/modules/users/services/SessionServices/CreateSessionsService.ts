@@ -1,10 +1,10 @@
 import { getCustomRepository } from "typeorm";
-import AppError from "../../../shared/errors/AppError";
-import User from "../typeorm/entities/User";
-import UsersRepository from "../typeorm/repositories/UsersRepository";
-import CheckUserPassService from "./CheckUserPassService";
+import AppError from "../../../../shared/errors/AppError";
+import User from "../../typeorm/entities/User";
+import UsersRepository from "../../typeorm/repositories/UsersRepository";
+import CheckUserPassService from "../PasswordServices/CheckUserPassService";
 import { sign } from 'jsonwebtoken'
-import authConfig from '../../../config/auth'
+import authConfig from '../../../../config/auth'
 
 interface IRequest {
   email: string;

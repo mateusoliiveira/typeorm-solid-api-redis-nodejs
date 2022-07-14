@@ -1,9 +1,9 @@
 import { getCustomRepository } from "typeorm";
-import AppError from "../../../shared/errors/AppError";
-import User from "../typeorm/entities/User";
-import UserToken from "../typeorm/entities/UserToken";
-import UsersRepository from "../typeorm/repositories/UsersRepository";
-import UserTokensRepository from "../typeorm/repositories/UserTokensRepository";
+import AppError from "../../../../shared/errors/AppError";
+import User from "../../typeorm/entities/User";
+import UserToken from "../../typeorm/entities/UserToken";
+import UsersRepository from "../../typeorm/repositories/UsersRepository";
+import UserTokensRepository from "../../typeorm/repositories/UserTokensRepository";
 import HashUserPassService from './HashUserPassService';
 
 interface IRequest {

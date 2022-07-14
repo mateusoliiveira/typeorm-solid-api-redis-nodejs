@@ -38,22 +38,6 @@ usersRouter
       .create);
 
 usersRouter
-  .patch(
-    '/:id',
-    celebrate({
-      [Segments.PARAMS]: {
-        id: Joi.string().uuid().required()
-      },
-      [Segments.BODY]: {
-        name: Joi.string().required(),
-        email: Joi.string().email().required(),
-        password: Joi.number().required(),
-      }
-    }),
-    usersController
-      .update);
-
-usersRouter
   .delete(
     '/:id',
     celebrate({

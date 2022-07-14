@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import UpdateAvatarUserService from '../services/UpdateAvatarUserService'
+import UpdateAvatarUserService from '../services/UserServices/UpdateAvatarUserService'
 
 export default class MediaController {
   public async update(request: Request, response: Response): Promise<Response> {
